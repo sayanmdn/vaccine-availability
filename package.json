@@ -1,0 +1,26 @@
+{
+  "name": "vaccine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "dateformat": "^4.5.1",
+    "node-cron": "^3.0.0",
+    "twilio": "^3.66.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sayanmdn/vaccine-availability.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sayanmdn/vaccine-availability/issues"
+  },
+  "homepage": "https://github.com/sayanmdn/vaccine-availability#readme"
+}
