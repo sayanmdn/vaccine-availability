@@ -5,9 +5,9 @@ const client = require('twilio')(accountSid, authToken);
 var dateFormat = require('dateformat');
 const axios = require('axios');
 
-
 const url = 'https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=721101&date='; //16-07-2021
 
+console.log("Program started")
 
 const sendMessage = data =>{
     client.messages 
@@ -23,25 +23,29 @@ const checkStatus = ()=>{
     var day=dateFormat(new Date(), "dd-mm-yyyy");
     const newurl = url + day
     // console.log(newurl)
-    // let availability = 0
     axios.get(newurl)
     .then(function (response) {
         // handle success
+        let availability = 0
         response.data.centers.forEach(center => {
             center.sessions.forEach(session =>{
                 if(session.available_capacity_dose1>0){
                     sendMessage("Available "+session.available_capacity_dose1 + " at "+ center.name)
+                    availability ++
                 }
             })
         });
-        console.log(JSON.stringify(response.data));
+        if(availability==0) {
+            sendMessage("Not Available")
+        }
+        // logger.info(JSON.stringify(response.data));
+        // console.log(JSON.stringify(response.data));
         // console.log("Avail = "+ availability);
     })
     .catch(function (error) {
         // handle error
         console.log(error);
     })
-    
     // sendMessage("new message from func")
 }
 
