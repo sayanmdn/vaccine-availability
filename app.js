@@ -1,6 +1,9 @@
 var cron = require('node-cron');
-const accountSid = 'ACab5c479a831c2ffb95d0ba67a1cbd317'; 
-const authToken = '53c4c7271048e412ae4b3e8eddcb13cf'; 
+const dotenv = require('dotenv');
+dotenv.config();
+const accountSid = process.env.TWILLO_SID;
+const authToken = process.env.TWILLO_AUTH_TOKEN;
+console.log("env vars are    "+accountSid)
 const client = require('twilio')(accountSid, authToken); 
 var dateFormat = require('dateformat');
 const axios = require('axios');
@@ -26,27 +29,23 @@ const checkStatus = ()=>{
     axios.get(newurl)
     .then(function (response) {
         // handle success
-        let availability = 0
+        // let availability = 0
         response.data.centers.forEach(center => {
             center.sessions.forEach(session =>{
                 if(session.available_capacity_dose1>0){
                     sendMessage("Available "+session.available_capacity_dose1 + " at "+ center.name)
-                    availability ++
+                    // availability ++
                 }
             })
         });
-        if(availability==0) {
-            sendMessage("Not Available")
-        }
-        // logger.info(JSON.stringify(response.data));
-        // console.log(JSON.stringify(response.data));
-        // console.log("Avail = "+ availability);
+        // if(availability==0) {
+        //     sendMessage("Not Available")
+        // }
     })
     .catch(function (error) {
         // handle error
         console.log(error);
     })
-    // sendMessage("new message from func")
 }
 
 
