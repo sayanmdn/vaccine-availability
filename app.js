@@ -50,7 +50,7 @@ const checkStatus = ()=>{
 }
 
 
-cron.schedule('*/30 * * * * *', () => {
+cron.schedule('*/30 * * * *', () => {
     checkStatus()
     console.log('running a task every thirty minutes');
 });
