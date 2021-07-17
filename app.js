@@ -1,6 +1,6 @@
 var cron = require('node-cron');
 const accountSid = 'ACab5c479a831c2ffb95d0ba67a1cbd317'; 
-const authToken = '27823ac83bad84bc6449bb31eddb040a'; 
+const authToken = '53c4c7271048e412ae4b3e8eddcb13cf'; 
 const client = require('twilio')(accountSid, authToken); 
 var dateFormat = require('dateformat');
 const axios = require('axios');
@@ -50,7 +50,7 @@ const checkStatus = ()=>{
 }
 
 
-cron.schedule('*/30 * * * *', () => {
+cron.schedule('*/30 * * * * *', () => {
     checkStatus()
     console.log('running a task every thirty minutes');
 });
